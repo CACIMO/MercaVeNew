@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart' as cambiar;
 import 'package:mercave/app/ui/constants.dart';
 
 class GatewayPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class GatewayPage extends StatefulWidget {
 class _GatewayPageState extends State<GatewayPage> {
   @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
+    return cambiar.WebviewScaffold(
       url: widget.checkoutUrl,
       appBar: new AppBar(
         automaticallyImplyLeading: false,

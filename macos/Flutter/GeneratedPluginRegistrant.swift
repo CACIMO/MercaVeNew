@@ -7,7 +7,7 @@ import Foundation
 
 import flutter_local_notifications
 import package_info
-import path_provider_macos
+import path_provider_foundation
 import sign_in_with_apple
 import sqflite
 import url_launcher_macos

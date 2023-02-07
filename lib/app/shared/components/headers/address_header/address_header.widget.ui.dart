@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as bbadge;
 import 'package:flutter/material.dart';
 import 'package:mercave/app/pages/store/_home/home.page.dart';
 import 'package:mercave/app/shared/components/buttons/whatsapp_button/whatsapp.button.component.dart';
@@ -167,7 +167,7 @@ class AddressHeaderWidgetUI {
       onTap: () {
         onCartIconTapped!();
       },
-      child: Badge(
+      child: bbadge.Badge(
         badgeColor: kCustomPrimaryColor,
         badgeContent: Text(
           cartProductsQty.toString(),

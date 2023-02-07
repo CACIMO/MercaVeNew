@@ -14,7 +14,7 @@ void main() async {
   //final pushNotificactionService = PushNotificactionService(_firebaseMessaging);
   //pushNotificactionService.initialise();
 
-  SessionService.setItem(key: 'loginPageDisplayed', value: 'false')
+  SessionService.setItem(key: 'loginPageDisplayed', value: 'true')
       .then((value) => runApp(
             MaterialApp(
               theme: ThemeData(primaryColor: kCustomSecondaryColor),
