@@ -5,6 +5,8 @@ import 'package:mercave/app/ui/constants.dart';
 
 class CategoryGridListWidgetUI {
   final BuildContext context;
+  final int numberColums;
+  final double ratio;
   final List<dynamic> categories;
   final Function onCategoryTapped;
 
@@ -13,6 +15,8 @@ class CategoryGridListWidgetUI {
 
   CategoryGridListWidgetUI({
     required this.context,
+    required this.numberColums,
+    required this.ratio,
     required this.categories,
     required this.onCategoryTapped,
   }) {
@@ -37,8 +41,8 @@ class CategoryGridListWidgetUI {
 
   Widget _getGridViewWidget() {
     return GridView.count(
-      crossAxisCount: 2,
-      childAspectRatio: 1.5,
+      crossAxisCount: numberColums,
+      childAspectRatio: ratio,
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       primary: false,

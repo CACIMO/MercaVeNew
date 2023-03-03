@@ -75,7 +75,8 @@ class HomePageUI {
     String address = 'Ingrese la dirección';
 
     if (userData != null) {
-      if (userData!['neighborhood'] != null && userData!['neighborhood'] != '') {
+      if (userData!['neighborhood'] != null &&
+          userData!['neighborhood'] != '') {
         neighborhood = userData!['neighborhood'];
       }
 
@@ -112,11 +113,11 @@ class HomePageUI {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          Visibility(
+          /* Visibility(
             visible: recommendedProducts.length > 0,
             child: _getPrincipalSliderOfFeaturedProductsWidget(context),
           ),
-          _getImageSliderOfProductsOnOfferedWidget(context),
+          _getImageSliderOfProductsOnOfferedWidget(context),*/
           _getGridImageListOfCategoriesWidget(context)
         ],
       ),
@@ -188,18 +189,22 @@ class HomePageUI {
   }
 
   Widget _getGridImageListOfCategoriesWidget(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TitlesWidget(
-          leftTitle: kCustomCategoryText,
-        ),
-        CategoryGridListWidget(
+    return Column(children: <Widget>[
+      CategoryGridListWidget(
           categories: categories,
+          ratio: 3,
+          numberColums: 1,
           onCategoryTapped: (category) {
             onCategoryTapped(category);
-          },
-        ),
-      ],
-    );
+          }),
+      TitlesWidget(leftTitle: kCustomMarkets),
+      CategoryGridListWidget(
+          categories: categories,
+          ratio: 1.5,
+          numberColums: 2,
+          onCategoryTapped: (category) {
+            onCategoryTapped(category);
+          })
+    ]);
   }
 }

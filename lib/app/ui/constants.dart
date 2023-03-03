@@ -30,6 +30,7 @@ const String kCustomRecommendedText = 'Recomendados';
 const String kCustomViewAllText = 'Ver Todos';
 const String kCustomOnOfferedText = '¡ Ofertas !';
 const String kCustomCategoryText = 'Pasillos';
+const String kCustomMarkets = 'Nuestros Aliados';
 const String kCustomNeighborhoodText = 'Barrio El Limonar';
 const String kCustomAddressText = 'Calle 6a # 16 109';
 const String kCustomAddToCartText = 'Agregar';
