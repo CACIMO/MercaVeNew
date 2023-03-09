@@ -45,7 +45,7 @@ class _UserFormPageState extends State<UserFormPage> {
     });
 
     int userId = await AuthService.getUserIdLogged();
-    Map userData = await UserDBService.getUserById(id: userId);
+    Map? userData = await UserDBService.getUserById(id: userId);
 
     if (userData != null) {
       setState(() {

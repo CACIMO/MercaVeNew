@@ -4,12 +4,10 @@ import 'package:mercave/app/core/services/http/http.service.dart';
 import 'package:mercave/app/shared/constants/constant.service.dart';
 
 class WordPressService {
-  static final String _managerUsername = 'mercaveadmin';
-  static final String _managerPassword = '7xCx!rUmd@mHTHq9IAKKTld5';
-  static final String _tokenUrl =
-      'https://www.mercave.com.co/wp-json/jwt-auth/v1/token';
-  static final String _wordPressApiRestUrl =
-      'https://www.mercave.com.co/wp-json/wp/v2';
+  static final String _managerUsername = 'userAdmin';
+  static final String _managerPassword = '1qpit3L1\$YBXyHD48TtC0jYj';
+  static final String _tokenUrl = 'wp-json/jwt-auth/v1/token';
+  static final String _wordPressApiRestUrl = 'wp-json/wp/v2';
 
   /// ==========================================================================
   /// Get the user token to allow make operations using the wordPress REST API.
@@ -128,13 +126,13 @@ class WordPressService {
         'Authorization': 'Bearer $managerToken',
         'Content-Type': 'application/json'
       };
+      Map<String, Map?>? fields;
+      fields = { "fields": metadata};
 
       await HttpService.post(
-        url: 'https://www.mercave.com.co//wp-json/acf/v3/users/$userId',
+        url: 'wp-json/acf/v3/users/$userId',
         headers: headers,
-        body: json.encode({
-          "fields": metadata,
-        }),
+        body: jsonEncode(fields),
       );
 
       return Future.value(true);

@@ -47,8 +47,10 @@ class HttpService {
   }) async {
     var payload;
 
+    Uri urlParse = Uri(scheme: "https", host: "www.laboratorio.mercave.com.co",path: url);
+
     HttpClient.Response response = await HttpClient.post(
-      Uri(path: url),
+      urlParse,
       headers: headers,
       body: body,
     ).timeout(

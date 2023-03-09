@@ -33,7 +33,9 @@ class _HomePageState extends State<HomePage> {
 
   List<dynamic> recommendedProducts = [];
   List<dynamic> productsOnOffered = [];
-  List<dynamic> categories = [];
+  List<dynamic> stores = [];
+  List<dynamic> storesPremium = [];
+  List<dynamic> storeStandard = [];
 
   Map? versionData;
   Map? userData;
@@ -87,7 +89,14 @@ class _HomePageState extends State<HomePage> {
         configAppVersion: config['current_app_version'],
       );
 
-      categories = await WooCommerceService().getCategories();
+      stores = await WooCommerceService().getStores();
+      for (var store in stores) {
+        {
+            store['premium'] == "1"
+                ? storesPremium.add(store)
+                : storeStandard.add(store);
+          }
+      }
       recommendedProducts = await WooCommerceService().getRecommendedProducts();
       productsOnOffered = await WooCommerceService().getProductsOnOffers();
 
@@ -222,7 +231,9 @@ class _HomePageState extends State<HomePage> {
           context: context,
           recommendedProducts: recommendedProducts,
           productsOnOffered: productsOnOffered,
-          categories: categories,
+          categories: stores,
+          storePremium: storesPremium,
+          storeStandard: storeStandard,
           userData: userData,
           userIsLogged: userIsLogged,
           cartProductsQty: cartProductsQty,

@@ -14,6 +14,8 @@ class HomePageUI {
   final List<dynamic> recommendedProducts;
   final List<dynamic> productsOnOffered;
   final List<dynamic> categories;
+  final List<dynamic> storePremium;
+  final List<dynamic> storeStandard;
   final int cartProductsQty;
 
   final Map? userData;
@@ -34,6 +36,8 @@ class HomePageUI {
     required this.recommendedProducts,
     required this.productsOnOffered,
     required this.categories,
+    required this.storePremium,
+    required this.storeStandard,
     this.userData,
     required this.userIsLogged,
     required this.loading,
@@ -192,6 +196,7 @@ class HomePageUI {
     return Column(children: <Widget>[
       CategoryGridListWidget(
           categories: categories,
+          stores:storePremium,
           ratio: 3,
           numberColums: 1,
           onCategoryTapped: (category) {
@@ -200,6 +205,7 @@ class HomePageUI {
       TitlesWidget(leftTitle: kCustomMarkets),
       CategoryGridListWidget(
           categories: categories,
+          stores:storeStandard,
           ratio: 1.5,
           numberColums: 2,
           onCategoryTapped: (category) {

@@ -34,7 +34,7 @@ class _UserMenuPageState extends State<UserMenuPage> {
 
   Future<void> _getUserData() async {
     int userId = await AuthService.getUserIdLogged();
-    Map userData = await UserDBService.getUserById(id: userId);
+    Map? userData = await UserDBService.getUserById(id: userId);
     if (!mounted) return;
     if (userData != null) {
       setState(() {

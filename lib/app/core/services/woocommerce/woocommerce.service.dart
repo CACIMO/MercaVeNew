@@ -192,7 +192,7 @@ class WooCommerceService {
       List<dynamic> wcCategories;
 
       if (ConfigService.USE_OWN_WOOCOMMERCE_API) {
-        endpoint = "${ConfigService.WC_OWN_ENDPOINT}wc_categories.php" +
+        endpoint = "${ConfigService.WC_OWN_ENDPOINT}wc_store.php" +
             '?$ownWooCommerceKeys';
         wcCategories = await HttpService.get(url: endpoint);
       } else {
@@ -206,6 +206,24 @@ class WooCommerceService {
       categories = wcCategories.where((i) => i['count'] > 0).toList();
 
       return Future.value(categories);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+  Future<dynamic> getStores() async {
+    List<dynamic> stores = [];
+
+    try {
+      String endpoint;
+      List<dynamic>? dokanStore;
+
+      if (ConfigService.USE_OWN_WOOCOMMERCE_API) {
+        endpoint = "${ConfigService.WC_OWN_ENDPOINT}wc_stores.php";
+        dokanStore = await HttpService.get(url: endpoint);
+      }
+      stores = dokanStore!.toList();
+
+      return Future.value(stores);
     } catch (e) {
       return Future.error(e);
     }

@@ -3,12 +3,14 @@ import 'package:mercave/app/shared/components/store/category_grid_list/category_
 
 class CategoryGridListWidget extends StatelessWidget {
   final List<dynamic> categories;
+  final List<dynamic> stores;
   final int numberColums;
   final double ratio;
   final Function onCategoryTapped;
 
   CategoryGridListWidget({
     required this.categories,
+    required this.stores,
     required this.numberColums,
     required this.ratio,
     required this.onCategoryTapped,
@@ -19,6 +21,7 @@ class CategoryGridListWidget extends StatelessWidget {
     return CategoryGridListWidgetUI(
       context: context,
       categories: categories,
+      stores:stores,
       numberColums: numberColums,
       ratio: ratio,
       onCategoryTapped: onCategoryTapped,

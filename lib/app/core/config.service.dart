@@ -8,10 +8,9 @@ class ConfigService {
   /// Woo-commerce Config
   /// ==========================================================================
   static const WC_ENDPOINT = 'https://www.mercave.com.co/';
-  static const WC_OWN_ENDPOINT = 'http://www.mercave.com.co/mobile/wc_api/';
+  static const WC_OWN_ENDPOINT = 'http://www.laboratorio.mercave.com.co/mobile/wc_api/';
   static const WC_CONSUMER_KEY = 'ck_c0b240598bd6ffa050546dbc98b832afbe5fb833';
-  static const WC_CONSUMER_SECRET =
-      'cs_410fc4a600fb2039e050e86ba01591c8a0013bcd';
+  static const WC_CONSUMER_SECRET = 'cs_410fc4a600fb2039e050e86ba01591c8a0013bcd';
 
   /// ==========================================================================
   /// App URL: iOS & Android

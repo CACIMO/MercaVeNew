@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mercave/app/shared/utils/string/string.service.dart';
-import 'package:mercave/app/ui/constants.dart';
+
+import '../../../../ui/constants.dart';
 
 class CategoryGridListWidgetUI {
   final BuildContext context;
   final int numberColums;
   final double ratio;
   final List<dynamic> categories;
+  final List<dynamic> stores;
   final Function onCategoryTapped;
 
   late double screenWidth;
@@ -18,6 +20,7 @@ class CategoryGridListWidgetUI {
     required this.numberColums,
     required this.ratio,
     required this.categories,
+    required this.stores,
     required this.onCategoryTapped,
   }) {
     _setDimensions();
@@ -27,6 +30,16 @@ class CategoryGridListWidgetUI {
     double viewportFraction = 0.9;
     screenWidth = MediaQuery.of(context).size.width;
     horizontalPadding = (screenWidth - screenWidth * viewportFraction) / 2;
+  }
+
+  Color? _convertColor(String? color) {
+    color = color!.replaceAll("#", "");
+    if (color.length == 6) {
+      color = "FF$color";
+    }
+    if (color.length == 8) {
+      return Color(int.parse("0x$color"));
+    }
   }
 
   Widget build() {
@@ -48,13 +61,13 @@ class CategoryGridListWidgetUI {
       primary: false,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      children: categories.map((category) {
+      children: stores.map((store) {
         return Builder(builder: (BuildContext context) {
           return GestureDetector(
             onTap: () {
-              onCategoryTapped(category);
+              onCategoryTapped(store);
             },
-            child: _getBackgroundImageDecoration(category: category),
+            child: _getBackgroundImageDecoration(category: store),
           );
         });
       }).toList(),
@@ -62,7 +75,17 @@ class CategoryGridListWidgetUI {
   }
 
   Widget _getBackgroundImageDecoration({Map? category}) {
-    return CachedNetworkImage(
+    return Material(
+        elevation: 5,
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+        child: Container(
+            decoration: BoxDecoration(
+                color: _convertColor(category!["color_background"]),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0))),
+            child: category["premium"] == "1"
+                ? _getPremiumButonWidget(category: category)
+                : _getStandardButonWidget(category: category)));
+    /*CachedNetworkImage(
       imageUrl: category!['principal_image'],
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
@@ -76,26 +99,57 @@ class CategoryGridListWidgetUI {
       ),
       placeholder: (context, url) => Image.asset(kCustomPlaceholderCategory),
       errorWidget: (context, url, error) => Icon(Icons.error),
-    );
+    );*/
   }
 
-  Widget _getCenterTextWidget({Map? category}) {
+  Widget _getPremiumButonWidget({Map? category}) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(
-            StringService.capitalize(category!['name']),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(children: [
+                Expanded(
+                    flex: 2,
+                    child: CachedNetworkImage(
+                      width: 100,
+                      height: 100,
+                      imageUrl: category!["icono"],
+                      placeholder: (context, url) =>
+                          Image.asset(kCustomPlaceholderCategory),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    )),
+                Expanded(
+                    flex: 8,
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                            StringService.capitalize(
+                                category!["dokan_data"]["store_name"]),
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                                fontSize: 20.0, color: Colors.white))))
+              ]))
+        ]);
+  }
+
+  Widget _getStandardButonWidget({Map? category}) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          CachedNetworkImage(
+            width: 50,
+            height: 50,
+            imageUrl: category!["icono"],
+            placeholder: (context, url) =>
+                Image.asset(kCustomPlaceholderCategory),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
-        ),
-      ],
-    );
+          Text(StringService.capitalize(category!["dokan_data"]["store_name"]),
+              textAlign: TextAlign.left,
+              style: const TextStyle(fontSize: 15.0, color: Colors.white))
+        ]);
   }
 }

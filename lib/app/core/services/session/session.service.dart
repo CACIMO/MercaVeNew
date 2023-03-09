@@ -15,7 +15,7 @@ class SessionService {
   }
 
   static Future getItem({required String key}) async {
-    String value;
+    String? value;
 
     try {
       value = await LocalStorageDBService.getItem(

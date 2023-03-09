@@ -279,26 +279,24 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _getCreateAccountButton({required BuildContext context}) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-      child: RoundButtonWidget(
-        text: 'Crear cuenta',
-        textColor: kCustomWhiteColor,
-        onPressed: () async {
-          if (_formKey.currentState!.validate()) {
-            _formKey.currentState!.save();
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+        child: RoundButtonWidget(
+            text: 'Crear cuenta',
+            textColor: kCustomWhiteColor,
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
 
-            RegisterController().createUser(
-              context: context,
-              formData: _registerFormData,
-            );
-          } else {
-            setState(() {
-              _autoValidate = true;
-            });
-          }
-        },
-      ),
-    );
+                RegisterController().createUser(
+                  context: context,
+                  formData: _registerFormData,
+                );
+              } else {
+                setState(() {
+                  _autoValidate = true;
+                });
+              }
+            }));
   }
 }

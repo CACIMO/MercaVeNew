@@ -20,7 +20,7 @@ class AuthService {
     int userId = 0;
 
     try {
-      String userIdStore = await SessionService.getItem(
+      String? userIdStore = await SessionService.getItem(
         key: USER_ID_LOGGED_KEY,
       );
 

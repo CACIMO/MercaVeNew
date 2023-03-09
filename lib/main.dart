@@ -2,9 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 import 'package:flutter/material.dart';
-import 'package:mercave/app/core/services/push_notification/push_service.dart';
 import 'package:mercave/app/pages/store/_home/home.page.dart';
 import 'package:mercave/app/ui/constants.dart';
+
 import 'app/core/services/session/session.service.dart';
 
 void main() async {
