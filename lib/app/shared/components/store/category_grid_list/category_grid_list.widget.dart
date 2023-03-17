@@ -8,12 +8,12 @@ class CategoryGridListWidget extends StatelessWidget {
   final double ratio;
   final Function onCategoryTapped;
 
-  CategoryGridListWidget({
+  const CategoryGridListWidget({
     required this.categories,
     required this.stores,
     required this.numberColums,
     required this.ratio,
-    required this.onCategoryTapped,
+    required this.onCategoryTapped
   });
 
   @override

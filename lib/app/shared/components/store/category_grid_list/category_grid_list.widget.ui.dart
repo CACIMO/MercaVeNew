@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mercave/app/core/services/woocommerce/woocommerce.service.dart';
 import 'package:mercave/app/shared/utils/string/string.service.dart';
 
 import '../../../../ui/constants.dart';
@@ -42,6 +43,12 @@ class CategoryGridListWidgetUI {
     }
   }
 
+  _getCategories(String storeId) async{
+
+    List<dynamic> categories = await WooCommerceService().getCategoriesByStore(storeId);
+    print(categories);
+}
+
   Widget build() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -65,9 +72,11 @@ class CategoryGridListWidgetUI {
         return Builder(builder: (BuildContext context) {
           return GestureDetector(
             onTap: () {
-              onCategoryTapped(store);
+              _getCategories(store["user_id"].toString());
+             // onCategoryTapped(store);
+              //print();
             },
-            child: _getBackgroundImageDecoration(category: store),
+            child:_getBackgroundImageDecoration(category: store),
           );
         });
       }).toList(),
@@ -145,7 +154,7 @@ class CategoryGridListWidgetUI {
             imageUrl: category!["icono"],
             placeholder: (context, url) =>
                 Image.asset(kCustomPlaceholderCategory),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+            errorWidget: (context, url, error) => const Icon(Icons.error)
           ),
           Text(StringService.capitalize(category!["dokan_data"]["store_name"]),
               textAlign: TextAlign.left,

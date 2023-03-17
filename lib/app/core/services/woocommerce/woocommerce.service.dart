@@ -228,6 +228,24 @@ class WooCommerceService {
       return Future.error(e);
     }
   }
+  Future<dynamic> getCategoriesByStore(String storeId) async {
+    List<dynamic> categories = [];
+
+    try {
+      String endpoint;
+      List<dynamic>? dokanStore;
+
+      if (ConfigService.USE_OWN_WOOCOMMERCE_API) {
+        endpoint = "${ConfigService.WC_OWN_ENDPOINT_DOKAN_STORES}$storeId/categories";
+        dokanStore = await HttpService.get(url: endpoint);
+      }
+      categories = dokanStore!.toList();
+
+      return Future.value(categories);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
 
   /// ==========================================================================
   /// This function allows to:

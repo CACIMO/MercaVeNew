@@ -15,7 +15,6 @@ import 'package:mercave/app/pages/account/address/address.page.dart';
 import 'package:mercave/app/pages/account/user_menu/user_menu.page.dart';
 import 'package:mercave/app/pages/store/_home/home.page.ui.dart';
 import 'package:mercave/app/pages/store/cart/cart_detail/cart_detail.page.dart';
-import 'package:mercave/app/pages/store/category/category.page.dart';
 import 'package:mercave/app/pages/store/category/category_detail/category_detail.page.dart';
 import 'package:mercave/app/pages/store/product/product_detail/product_detail.page.dart';
 import 'package:mercave/app/pages/store/product/search_product/search_product.page.dart';
@@ -23,21 +22,23 @@ import 'package:mercave/app/shared/components/buttons/round_button/round_button.
 import 'package:mercave/app/ui/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomePage extends StatefulWidget {
+class CategoryPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _CategoryPageState createState() => _CategoryPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CategoryPageState extends State<CategoryPage> {
   bool loading = false;
   bool error = false;
 
+/*
   List<dynamic> recommendedProducts = [];
   List<dynamic> productsOnOffered = [];
   List<dynamic> stores = [];
   List<dynamic> storesPremium = [];
   List<dynamic> storeStandard = [];
-
+*/
+  /*
   Map? versionData;
   Map? userData;
   String? avatar;
@@ -45,12 +46,12 @@ class _HomePageState extends State<HomePage> {
   int cartProductsQty = 0;
 
   bool loginPageDisplayed = false;
-
+*/
   @override
   initState() {
     super.initState();
-    isLoginPageDisplayed();
-    loadData();
+    //isLoginPageDisplayed();
+    //loadData();
   }
 
   @override
@@ -64,13 +65,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Retrieve value from localStorage in SQLite and set it in local variable loginPageDisplayed
+  /*
   isLoginPageDisplayed() async {
     await SessionService.getItem(key: 'loginPageDisplayed').then((value) async {
       if (value != null) {
         loginPageDisplayed = value == 'true' ? true : false;
       }
     });
-  }
+  }*/
+/*
 
   loadData() async {
     setState(() {
@@ -93,10 +96,10 @@ class _HomePageState extends State<HomePage> {
       stores = await WooCommerceService().getStores();
       for (var store in stores) {
         {
-            store['premium'] == "1"
-                ? storesPremium.add(store)
-                : storeStandard.add(store);
-          }
+          store['premium'] == "1"
+              ? storesPremium.add(store)
+              : storeStandard.add(store);
+        }
       }
       recommendedProducts = await WooCommerceService().getRecommendedProducts();
       productsOnOffered = await WooCommerceService().getProductsOnOffers();
@@ -114,7 +117,7 @@ class _HomePageState extends State<HomePage> {
       });
     }
 
-    await SessionService.removeItem(key: 'reloadHomePage');
+    await SessionService.removeItem(key: 'reloadCategoryPage');
   }
 
   void _getUserData() async {
@@ -177,7 +180,7 @@ class _HomePageState extends State<HomePage> {
 
   void refreshProducts() async {
     String reloadAllInfo = await SessionService.getItem(
-      key: 'reloadHomePage',
+      key: 'reloadCategoryPage',
     );
 
     if (reloadAllInfo != null) {
@@ -205,7 +208,7 @@ class _HomePageState extends State<HomePage> {
         for (int j = 0; j < recommendedProducts.length; j++) {
           if (recommendedProducts[j]['id'] == cart['products'][i]['id']) {
             recommendedProducts[j]['quantity'] =
-                cart['products'][i]['quantity'];
+            cart['products'][i]['quantity'];
           }
         }
 
@@ -219,16 +222,15 @@ class _HomePageState extends State<HomePage> {
       setState(() {});
     }).catchError((error) {});
   }
+*/
 
   @override
   Widget build(BuildContext context) {
-    if (versionData != null && versionData!['update_version']) {
-      return _getNoEqualVersionWidget();
-    } else {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: kCustomSecondaryColor),
-        home: HomePageUI(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primaryColor: kCustomSecondaryColor),
+      home:
+          /*CategoryPageUI(
           context: context,
           recommendedProducts: recommendedProducts,
           productsOnOffered: productsOnOffered,
@@ -245,9 +247,7 @@ class _HomePageState extends State<HomePage> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CategoryPage(
-
-                ),
+                builder: (context) => ProductDetailPage(productParam: product),
               ),
             );
 
@@ -259,7 +259,7 @@ class _HomePageState extends State<HomePage> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    CategoryPage(),
+                    CategoryDetailPage(categoryParam: category),
               ),
             );
 
@@ -321,11 +321,11 @@ class _HomePageState extends State<HomePage> {
             _getUserData();
             refreshProducts();
           },
-        ).build(),
-      );
-    }
+        )*/
+          Container(),
+    );
   }
-
+/*
   Widget _getNoEqualVersionWidget() {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -401,5 +401,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
+  }*/
 }
